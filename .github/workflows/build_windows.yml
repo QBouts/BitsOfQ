@@ -1,0 +1,68 @@
+# Build for Windows
+name: Build Windows
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+
+env:
+  # Change build type here
+  BUILD_TYPE: Release
+  # Path to file containing vcpkg packages to install
+  REPO_DIR: ${{github.workspace}}\\repo 
+  VCPKG_RESPONSE_FILE: ${{github.workspace}}\\repo\\vcpkg_response_file.txt 
+  
+jobs:
+  build:
+    # Define build matrix
+    strategy:
+      matrix:
+        compiler: [msvc] 
+        os: [windows-latest]
+    
+    # Run for matrix elements
+    runs-on: ${{matrix.os}}
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: repo
+          submodules: 'recursive'
+
+      # Get the ninja generator to use for windows
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@main
+        id: runvcpkg
+        with:
+          runVcpkgInstall: true
+          # Location of the vcpkg as submodule of the repository.
+          vcpkgDirectory: '${{ github.workspace }}\vcpkg-latest'
+          # Select a commit of vcpkg to use as base. TODO: fix a port overlay to get specific dependency versions
+          vcpkgGitCommitId: '256c8d6ac6b9d8c834a687b30274ee87c303cb5d'
+          vcpkgTriplet: x64-windows
+              
+      - name: Create Build Environment
+        # Some projects don't allow in-source building, so create a separate build directory
+        # We'll use this as our working directory for all subsequent commands
+        run: cmake -E make_directory ${{runner.workspace}}/build
+      
+      # Build with Ninja and Vcpkg dependencies
+      - name: Run CMake with Ninja
+        uses: lukka/run-cmake@main
+        id: runcmake
+        with:
+          cmakeListsTxtPath: '${{ env.REPO_DIR }}\\CMakeLists.txt'
+          useVcpkgToolchainFile: true
+          cmakeBuildType: ${{env.BUILD_TYPE}} 
+          vcpkgTriplet: x64-windows
+          # Use Ninja to generate and build
+          cmakeListsOrSettingsJson: "CMakeListsTxtAdvanced"
+          cmakeAppendedArgs: '-GNinja -Dgtest_force_shared_crt=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_IPCH=ON -DTMXLITE_STATIC_LIB=ON -DENABLE_CACHE=ON -DCACHE_OPTION=clcache'   
+          # Build in the previously created folder 
+          buildDirectory: ${{runner.workspace}}/build
