@@ -1,0 +1,63 @@
+# Build for Windows
+name: Build Windows
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+
+env:
+  # Change build type here
+  BUILD_TYPE: Release
+  # Path to file containing vcpkg packages to install
+  REPO_DIR: ${{github.workspace}}\\repo 
+  VCPKG_RESPONSE_FILE: ${{github.workspace}}\\repo\\vcpkg_response_file.txt 
+  VCPKG_FEATURE_FLAGS: manifests
+  
+jobs:
+  build:
+    # Define build matrix
+    strategy:
+      matrix:
+        compiler: [msvc] 
+        os: [windows-latest]
+    
+    # Run for matrix elements
+    runs-on: ${{matrix.os}}
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: repo
+          submodules: 'recursive'
+
+      # Get the ninja generator to use for windows
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@main
+        id: runvcpkg
+        with:
+          runVcpkgInstall: true
+          # Location of the vcpkg as submodule of the repository.
+          vcpkgDirectory: '${{ github.workspace }}\vcpkg-latest'
+          # Select a commit of vcpkg to use as base. 
+          vcpkgGitCommitId: '1085a57da0725c19e19586025438e8c16f34c890'
+          vcpkgTriplet: x64-windows
+              
+      - name: Create Build Environment
+        # Some projects don't allow in-source building, so create a separate build directory
+        # We'll use this as our working directory for all subsequent commands
+        run: cmake -E make_directory ${{runner.workspace}}\build
+      
+      # Build with Ninja and Vcpkg dependencies
+      - name: Generate makefiles
+        working-directory: ${{github.workspace}}\repo
+        run: cmake . -GNinja -B ${{runner.workspace}}\build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg-latest\scripts\buildsystems\vcpkg.cmake
+
+      - name: Build 
+        working-directory: ${{runner.workspace}}\build
+        run: ninja
