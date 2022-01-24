@@ -44,8 +44,8 @@ jobs:
           runVcpkgInstall: true
           # Location of the vcpkg as submodule of the repository.
           vcpkgDirectory: '${{ github.workspace }}\vcpkg-latest'
-          # Select a commit of vcpkg to use as base. TODO: fix a port overlay to get specific dependency versions
-          vcpkgGitCommitId: '256c8d6ac6b9d8c834a687b30274ee87c303cb5d'
+          # Select a commit of vcpkg to use as base. 
+          vcpkgGitCommitId: '1085a57da0725c19e19586025438e8c16f34c890'
           vcpkgTriplet: x64-windows
               
       - name: Create Build Environment
