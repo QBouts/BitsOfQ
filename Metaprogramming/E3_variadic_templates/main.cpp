@@ -28,7 +28,7 @@
 
 void printn() {
 	std::cout << '\n';
-};
+}
 
 template <typename LAST>
 void printn(LAST &&t) {
