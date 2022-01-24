@@ -19,7 +19,7 @@ jobs:
          os: [ubuntu-20.04]
 
     runs-on: ${{ matrix.os }} 
-    timeout-minutes: 60
+    timeout-minutes: 10
     steps:
     - uses: actions/checkout@v2
 
@@ -30,6 +30,11 @@ jobs:
         sudo apt update
         sudo apt install gcc-11 g++-11
     
+    - name: Install libc++12
+      if: ${{matrix.compiler == 'clang++-12'}}
+      run: |
+        sudo apt-get install -y libc++-12-dev libc++abi-12-dev
+
     - name: Install dependencies from apt
       run: sudo apt-get install libboost-dev
     
