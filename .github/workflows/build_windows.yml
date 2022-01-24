@@ -13,6 +13,7 @@ env:
   # Path to file containing vcpkg packages to install
   REPO_DIR: ${{github.workspace}}\\repo 
   VCPKG_RESPONSE_FILE: ${{github.workspace}}\\repo\\vcpkg_response_file.txt 
+  VCPKG_FEATURE_FLAGS: manifests
   
 jobs:
   build:
