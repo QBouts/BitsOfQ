@@ -54,16 +54,9 @@ jobs:
         run: cmake -E make_directory ${{runner.workspace}}/build
       
       # Build with Ninja and Vcpkg dependencies
-      - name: Run CMake with Ninja
-        uses: lukka/run-cmake@main
-        id: runcmake
-        with:
-          cmakeListsTxtPath: '${{ env.REPO_DIR }}\\CMakeLists.txt'
-          useVcpkgToolchainFile: true
-          cmakeBuildType: ${{env.BUILD_TYPE}} 
-          vcpkgTriplet: x64-windows
-          # Use Ninja to generate and build
-          cmakeListsOrSettingsJson: "CMakeListsTxtAdvanced"
-          cmakeAppendedArgs: '-GNinja -Dgtest_force_shared_crt=ON -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_IPCH=ON -DTMXLITE_STATIC_LIB=ON -DENABLE_CACHE=ON -DCACHE_OPTION=clcache'   
-          # Build in the previously created folder 
-          buildDirectory: ${{runner.workspace}}/build
+      - name: Generate makefiles
+        run: cmake . -GNinja -B ${{runner.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg-latest\scripts\buildsystems\vcpkg.cmake
+
+      - name: Build 
+        working-directory: ${{runner.workspace}}/build
+        run: ninja
