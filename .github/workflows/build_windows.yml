@@ -55,6 +55,7 @@ jobs:
       
       # Build with Ninja and Vcpkg dependencies
       - name: Generate makefiles
+        working-directory: ${{runner.workspace}}/repo
         run: cmake . -GNinja -B ${{runner.workspace}}/build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg-latest\scripts\buildsystems\vcpkg.cmake
 
       - name: Build 
