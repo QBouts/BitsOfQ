@@ -53,7 +53,7 @@ template <typename T, typename... Ts>
 Tuple(T e1, Ts... rest) -> Tuple<std::unwrap_ref_decay_t<T>, std::unwrap_ref_decay_t<Ts>...>;
 
 template <typename... ELEMS>
-auto make_tuple(ELEMS&&... elems) {
+constexpr auto make_tuple(ELEMS&&... elems) {
 	return Tuple<std::unwrap_ref_decay_t<ELEMS>...>{std::forward<ELEMS>(elems)...};
 }
 
