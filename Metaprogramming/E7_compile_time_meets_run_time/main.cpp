@@ -28,8 +28,6 @@
 #include "Tuple.h"
 
 
-namespace bits_of_q {}  // namespace bits_of_q
-
 int main() {
 	using namespace bits_of_q;
 
