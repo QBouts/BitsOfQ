@@ -52,12 +52,15 @@ jobs:
         # Some projects don't allow in-source building, so create a separate build directory
         # We'll use this as our working directory for all subsequent commands
         run: cmake -E make_directory ${{runner.workspace}}\build
-      
+
+      # Enable usage of msvc      
+      - uses: ilammy/msvc-dev-cmd@v1
+
       # Build with Ninja and Vcpkg dependencies
       - name: Generate makefiles
         working-directory: ${{github.workspace}}\repo
         run: cmake . -GNinja -B ${{runner.workspace}}\build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg-latest\scripts\buildsystems\vcpkg.cmake
-
+      
       - name: Build 
         working-directory: ${{runner.workspace}}\build
         run: ninja
