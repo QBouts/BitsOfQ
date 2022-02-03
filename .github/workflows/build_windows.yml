@@ -30,6 +30,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        uses: ilammy/msvc-dev-cmd@v1
         with:
           path: repo
           submodules: 'recursive'
@@ -57,7 +58,7 @@ jobs:
       - name: Generate makefiles
         working-directory: ${{github.workspace}}\repo
         run: cmake . -GNinja -B ${{runner.workspace}}\build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg-latest\scripts\buildsystems\vcpkg.cmake
-
+      
       - name: Build 
         working-directory: ${{runner.workspace}}\build
         run: ninja
