@@ -25,11 +25,10 @@
 #ifndef BOQ_TUPLE_H
 #define BOQ_TUPLE_H
 
-#include <__utility/integer_sequence.h>
-
 #include <functional>
 #include <memory>
 #include <type_traits>
+#include <utility>
 
 #include "Metaprogramming.h"
 

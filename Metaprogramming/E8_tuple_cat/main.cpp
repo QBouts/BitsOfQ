@@ -23,13 +23,11 @@
  ******************************************************************************/
 
 
-#include <boost/type_index.hpp>
+#include <iostream>
 
 #include "Metaprogramming.h"
 #include "TestUtilities.h"
 #include "Tuple.h"
-
-using boost::typeindex::type_id_with_cvr;
 
 constexpr size_t boq_tuple = 1;
 constexpr size_t std_tuple = 2;

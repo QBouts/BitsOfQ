@@ -26,14 +26,11 @@
 #define BOQ_METAPROGRAMMING_H
 
 #include <cassert>
-#include <iostream>
 #include <list>
 #include <string>
 #include <tuple>
 #include <type_traits>
 #include <utility>
-#include <vector>
-
 namespace bits_of_q {
 
 template <typename T>
