@@ -28,6 +28,7 @@
 #include <array>
 #include <exception>
 #include <iostream>
+#include <memory>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -51,7 +52,7 @@ inline std::ostream &operator<<(std::ostream &os, const CopyStats &stats) {
 template <size_t i>
 struct IndexedCopyCounter {
 	struct reset_after_construct_t {};
-	static constexpr reset_after_construct_t reset_after_construct;
+	static constexpr reset_after_construct_t reset_after_construct{};
 
 	inline static CopyStats stats;
 

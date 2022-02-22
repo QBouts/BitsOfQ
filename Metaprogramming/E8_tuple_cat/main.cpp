@@ -83,9 +83,9 @@ int main() {
 		auto &&[std_tuple1, std_tuple2] = builder.build(std::tuple{42, c2, true}, std::tuple{false, c2, 1.2});
 
 		auto boq_t1_2 =
-		    tuple_cat(std::forward<decltype(boq_tuple1)>(boq_tuple1), std::forward<decltype(boq_tuple2)>(boq_tuple2));
+		    boq::tuple_cat(std::forward<decltype(boq_tuple1)>(boq_tuple1), std::forward<decltype(boq_tuple2)>(boq_tuple2));
 		auto std_t1_2 =
-		    tuple_cat(std::forward<decltype(std_tuple1)>(std_tuple1), std::forward<decltype(std_tuple2)>(std_tuple2));
+		    std::tuple_cat(std::forward<decltype(std_tuple1)>(std_tuple1), std::forward<decltype(std_tuple2)>(std_tuple2));
 
 		static_for<0, tuple_size_v<decltype(boq_t1_2)>>(
 		    [&](auto i) { ASSERT(get<i.value>(boq_t1_2) == get<i.value>(std_t1_2)); });
@@ -100,12 +100,12 @@ int main() {
 		auto &&[std_tuple1, std_tuple2, std_tuple3] =
 		    builder.build(std::tuple{42, c2, true}, std::tuple{false, c2, 1.2}, std::tuple{7, 'c'});
 
-		auto boq_t1_2_3 = tuple_cat(std::forward<decltype(boq_tuple1)>(boq_tuple1),
-		                            std::forward<decltype(boq_tuple2)>(boq_tuple2),
-		                            std::forward<decltype(boq_tuple3)>(boq_tuple3));
-		auto std_t1_2_3 = tuple_cat(std::forward<decltype(std_tuple1)>(std_tuple1),
-		                            std::forward<decltype(std_tuple2)>(std_tuple2),
-		                            std::forward<decltype(std_tuple3)>(std_tuple3));
+		auto boq_t1_2_3 = boq::tuple_cat(std::forward<decltype(boq_tuple1)>(boq_tuple1),
+		                                 std::forward<decltype(boq_tuple2)>(boq_tuple2),
+		                                 std::forward<decltype(boq_tuple3)>(boq_tuple3));
+		auto std_t1_2_3 = std::tuple_cat(std::forward<decltype(std_tuple1)>(std_tuple1),
+		                                 std::forward<decltype(std_tuple2)>(std_tuple2),
+		                                 std::forward<decltype(std_tuple3)>(std_tuple3));
 
 
 		static_for<0, tuple_size_v<decltype(boq_t1_2_3)>>(
