@@ -78,7 +78,7 @@ struct IndexedCopyCounter {
 	template <size_t i2>
 	bool operator==(const IndexedCopyCounter<i2> &other) const {
 		return stats == other.stats;
-	};
+	}
 };
 
 namespace detail {
@@ -99,11 +99,11 @@ IndexedCopyCounter<index> make_copy_counter() {
 /// For any serious project, please use a well-established testing framework such as GoogleTest or Catch.
 namespace bits_of_q::testing {
 struct AssertFailed : std::runtime_error {
-	explicit AssertFailed(std::string_view file, size_t line_nr, std::string_view expression)
+	explicit AssertFailed(std::string_view file_path, size_t line, std::string_view assert_expression)
 	    : std::runtime_error("assert failed")
-	    , file(file)
-	    , line_nr(line_nr)
-	    , expression(expression) {}
+	    , file(file_path)
+	    , line_nr(line)
+	    , expression(assert_expression) {}
 	std::string_view file;
 	size_t line_nr;
 	std::string_view expression;
@@ -246,7 +246,7 @@ private:
 	template <size_t config, size_t... arg_indices>
 	static std::string get_config_str(std::index_sequence<arg_indices...>) {
 		return "| " + ((std::string{config_to_string(compute_arg_config<config, arg_indices>())} + " | ") + ...);
-	};
+	}
 };
 
 template <Configuration... configs>
