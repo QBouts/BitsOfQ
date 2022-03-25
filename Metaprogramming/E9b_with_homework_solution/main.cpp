@@ -54,8 +54,8 @@ int main() {
 		auto c1 = make_copy_counter<boq_tuple>();
 		auto c2 = make_copy_counter<std_tuple>();
 
-		make_tuple(8, c1, 1.1);
-		std::make_tuple(8, c2, 1.1);
+		[[maybe_unused]] auto &&dummy1 = make_tuple(8, c1, 1.1);
+		[[maybe_unused]] auto &&dummy2 = std::make_tuple(8, c2, 1.1);
 
 		ASSERT_EQ(c1, c2);
 	});
@@ -104,10 +104,10 @@ int main() {
 		std::tuple std_tuple2{false, c2, 1.2};
 
 		auto boq_t1_2_3 = boq::tuple_cat(std::forward<decltype(boq_tuple1)>(boq_tuple1),
-		                                 std::forward<decltype(boq_tuple2)>(boq_tuple2),
+		                                 std::move(boq_tuple2),
 		                                 std::forward<decltype(boq_tuple3)>(boq_tuple3));
 		auto std_t1_2_3 = std::tuple_cat(std::forward<decltype(std_tuple1)>(std_tuple1),
-		                                 std::forward<decltype(std_tuple2)>(std_tuple2),
+		                                 std::move(std_tuple2),
 		                                 std::forward<decltype(std_tuple3)>(std_tuple3));
 
 
