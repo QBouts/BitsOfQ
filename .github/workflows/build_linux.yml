@@ -33,6 +33,7 @@ jobs:
     - name: Install libc++12
       if: ${{matrix.compiler == 'clang++-12'}}
       run: |
+        sudo apt update
         sudo apt-get install -y libc++-12-dev libc++abi-12-dev
 
     - name: Install dependencies from apt
