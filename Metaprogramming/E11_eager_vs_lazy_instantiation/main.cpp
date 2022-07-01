@@ -61,7 +61,7 @@ void run_test() {
 	if constexpr (i == 2) {
 		[[maybe_unused]] naive_lazy::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
 	}
-	/* // implementations will of the algorithms below will be demonstrated and explained in the next episodes!
+	/* // implementations of the algorithms below will be demonstrated and explained in the next episodes!
 	if constexpr (i == 3) {
 	  [[maybe_unused]] composed::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
 	}
