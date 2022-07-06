@@ -199,7 +199,8 @@ constexpr auto cat_tuple_content(TUP&& t, std::index_sequence<indices...>) {
 template <template <typename...> class PREDICATE, typename TUP>
 constexpr auto filter(TUP&& tup) {
 	auto wrap_if_pred_matches = [&]<typename ELEM>(ELEM&& e) {
-		if constexpr (PREDICATE<std::remove_cvref_t<ELEM>>::value) {
+		using ELEM_without_cvref = std::remove_cvref_t<ELEM>;
+		if constexpr (PREDICATE<ELEM_without_cvref>::value) {
 			return forward_as_tuple(std::forward<ELEM>(e));
 		} else {
 			return Tuple<>{};
