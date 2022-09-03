@@ -22,8 +22,10 @@
  * SOFTWARE.
  ******************************************************************************/
 
-#include "ComposedDefaults64.h"
-#include "ComposedSelection64.h"
+//#include "ComposedDefaults64.h"
+#include "ComposedDefaults1024.h"
+//#include "ComposedSelection64.h"
+#include "ComposedSelection1024.h"
 #include "TypeList.h"
 
 namespace bits_of_q::small_input_benchmark {
@@ -44,11 +46,13 @@ struct same_as_pred {
 #if ALGO == 7
 
 template <typename LIST>
-using remove_if_algo = composed_defaults64::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
+// using remove_if_algo = composed_defaults64::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
+using remove_if_algo = composed_defaults1024::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
 
 #elif ALGO == 8
 template <typename LIST>
-using remove_if_algo = composed_selection64::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
+// using remove_if_algo = composed_selection64::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
+using remove_if_algo = composed_selection1024::remove_if<same_as_pred<dummy<0>>::template predicate, LIST>;
 
 #endif
 
