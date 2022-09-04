@@ -37,6 +37,7 @@
 #include "ComposedDefaults64.h"
 #include "ComposedFastTrack.h"
 #include "ComposedFastTrack64.h"
+#include "ComposedSelection1024.h"
 #include "ComposedSelection64.h"
 //#include "HighPerformance.h"
 #include "Naive.h"
@@ -61,12 +62,12 @@ struct same_as_pred {
 #endif
 /*
 using input10240_same4 =
-    composed_defaults64::join_t<input2048_same4, input2048_same4, input2048_same4, input2048_same4, input2048_same4>;
-using input20480_same4 = composed_defaults64::join_t<input10240_same4, input10240_same4>;
-using input30720_same4 = composed_defaults64::join_t<input10240_same4, input10240_same4, input10240_same4>;
+    composed_selection1024::join_t<input2048_same4, input2048_same4, input2048_same4, input2048_same4, input2048_same4>;
+using input20480_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4>;
+using input30720_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4>;
 using input40960_same4 =
-    composed_defaults64::join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
-using input51200_same4 = composed_defaults64::
+    composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
+using input51200_same4 = composed_selection1024::
     join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
 
 #undef INPUT
@@ -97,7 +98,8 @@ void run_test() {
 		[[maybe_unused]] composed_defaults64::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
 	}
 	if constexpr (i == 8) {
-		[[maybe_unused]] composed_selection64::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
+		//[[maybe_unused]] composed_selection64::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
+		[[maybe_unused]] composed_selection1024::remove_if<same_as_pred<T>::template predicate, INPUT> t{};
 	}
 }
 int main() {
@@ -106,12 +108,13 @@ int main() {
 	[[maybe_unused]] input512_same4 dummy3;
 	[[maybe_unused]] input1024_same4 dummy4;
 	[[maybe_unused]] input2048_same4 dummy5;
+
 	/*
 	[[maybe_unused]] input10240_same4 dummy6;
 	[[maybe_unused]] input20480_same4 dummy7;
 	[[maybe_unused]] input30720_same4 dummy8;
 	[[maybe_unused]] input40960_same4 dummy9;
-	[[maybe_unused]] input51200_same4 dummy10;*/
+	[[maybe_unused]] input51200_same4 dummy10;  //*/
 	//[[maybe_unused]] INPUT dummy{};
 	run_test<void>();
 	return 0;

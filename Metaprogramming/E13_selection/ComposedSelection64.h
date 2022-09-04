@@ -262,7 +262,7 @@ struct join_select<4> { // more than 64
 		               T36s..., T37s..., T38s..., T39s..., T40s..., T41s..., T42s...,
 		               T43s..., T44s..., T45s..., T46s..., T47s..., T48s..., T49s...,
 		               T50s..., T51s..., T52s..., T53s..., T54s..., T55s..., T56s...,
-		               T57s..., T58s..., T59s..., T60s..., T61s..., T62s..., T63s...>, MORE_LISTS...>;
+		               T57s..., T58s..., T59s..., T60s..., T61s..., T62s..., T63s...>, MORE_LISTS...>::type;
 	};
 };
 // clang-format on
@@ -285,6 +285,28 @@ static_assert(std::is_same_v<join_t<type_list<>, type_list<int, bool>>, type_lis
 static_assert(std::is_same_v<join_t<type_list<int, float>, type_list<int, bool>, type_list<float, double>>,
                              type_list<int, float, int, bool, float, double>>);
 
+// clang-format off
+static_assert(std::is_same_v < join_t <
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+              type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
+							type_list<char>>, 
+							
+              type_list<int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, char>>
+                                            );
+// clang-format on
 ///////////////////////////////// TRANSFORM ///////////////////////////////////
 
 template <typename LIST, template <typename> class FUNC>
