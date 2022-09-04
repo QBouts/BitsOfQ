@@ -296,15 +296,17 @@ static_assert(std::is_same_v < join_t <
               type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
               type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,type_list<int>,
 							type_list<char>>, 
-							type_list<int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, 
-int, int, int, int, int, int, int, int, char>>
+							
+              type_list<int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, 
+                        int, int, int, int, int, int, int, int, char>>
                                             );
+// clang-format on
 ///////////////////////////////// TRANSFORM ///////////////////////////////////
 
 template <typename LIST, template <typename> class FUNC>
