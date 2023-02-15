@@ -16,7 +16,8 @@ env:
   # Path to file containing vcpkg packages to install
   REPO_DIR: ${{github.workspace}}\\repo 
   VCPKG_FEATURE_FLAGS: manifests
-  
+  # Commit to checkout, 2023.01.09 Release
+  VCPKG_COMMIT_ID: f14984af3738e69f197bf0e647a8dca12de92996
 jobs:
   build:
     # Define build matrix
@@ -43,8 +44,7 @@ jobs:
         with:
             repository: microsoft/vcpkg
             path: vcpkg-latest
-            # Commit to checkout, 2023.01.09 Release
-            ref: 'f14984af3738e69f197bf0e647a8dca12de92996'
+            ref: ${{env.VCPKG_COMMIT_ID}}
       
       # Get the ninja generator to use for windows
       - uses: seanmiddleditch/gha-setup-ninja@master
@@ -57,6 +57,8 @@ jobs:
           # Location of the vcpkg as submodule of the repository.
           vcpkgDirectory: '${{ github.workspace }}\vcpkg-latest'
           runVcpkgInstall: true
+          vcpkgJsonGlob: repo/vcpkg.json
+          vcpkgGitCommitId: ${{env.VCPKG_COMMIT_ID}}
 
       - name: Create Build Environment
         # Some projects don't allow in-source building, so create a separate build directory
