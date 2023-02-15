@@ -61,8 +61,9 @@ struct same_as_pred {
 #define INPUT input1024_same4
 #endif
 //*
-using input10240_same4 =
-    composed_selection1024::join_t<input2048_same4, input2048_same4, input2048_same4, input2048_same4, input2048_same4>;
+// using input10240_same4 =
+//    composed_selection1024::join_t<input2048_same4, input2048_same4, input2048_same4, input2048_same4,
+//    input2048_same4>;
 // using input20480_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4>;
 // using input30720_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4>;
 // using input40960_same4 =
@@ -70,10 +71,10 @@ using input10240_same4 =
 // using input51200_same4 = composed_selection1024::
 //     join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
 
-#undef INPUT
-//#define INPUT input1024_same4  //*/
-#define INPUT input10240_same4  //*/
-//#define INPUT input51200_same4  //*/
+//#undef INPUT
+//#define INPUT input1024_same4
+//#define INPUT input10240_same4
+//#define INPUT input51200_same4
 
 template <typename T>
 void run_test() {
@@ -113,9 +114,8 @@ int main() {
 	[[maybe_unused]] input256_same4 dummy2;
 	[[maybe_unused]] input512_same4 dummy3;
 	[[maybe_unused]] input1024_same4 dummy4;
-	[[maybe_unused]] input2048_same4 dummy5;
+	/*[[maybe_unused]] input2048_same4 dummy5;
 
-	/*
 	[[maybe_unused]] input10240_same4 dummy6;
 	[[maybe_unused]] input20480_same4 dummy7;
 	[[maybe_unused]] input30720_same4 dummy8;
