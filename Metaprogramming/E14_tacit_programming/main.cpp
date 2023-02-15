@@ -63,16 +63,16 @@ struct same_as_pred {
 //*
 using input10240_same4 =
     composed_selection1024::join_t<input2048_same4, input2048_same4, input2048_same4, input2048_same4, input2048_same4>;
-using input20480_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4>;
-using input30720_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4>;
-using input40960_same4 =
-    composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
-using input51200_same4 = composed_selection1024::
-    join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
+// using input20480_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4>;
+// using input30720_same4 = composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4>;
+// using input40960_same4 =
+//     composed_selection1024::join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
+// using input51200_same4 = composed_selection1024::
+//     join_t<input10240_same4, input10240_same4, input10240_same4, input10240_same4, input10240_same4>;
 
 #undef INPUT
-#define INPUT input1024_same4  //*/
-//#define INPUT input10240_same4  //*/
+//#define INPUT input1024_same4  //*/
+#define INPUT input10240_same4  //*/
 //#define INPUT input51200_same4  //*/
 
 template <typename T>
