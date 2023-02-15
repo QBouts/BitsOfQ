@@ -1991,16 +1991,15 @@ struct join_select<6> { // more than 1024
 }  // namespace detail
 template <typename C = listify>
 struct join {
-#ifdef BOQ_PLATFORM_WINDOWS
 	template <typename... Ts>
 	static constexpr int join_size = detail::select_join_size(sizeof...(Ts));
 	template <typename... Ts>
 	using f = typename detail::join_select<join_size<Ts...>>::template f<C::template f, Ts...>::type;
-#else
-	template <typename... Ts>
-	using f =
-	    typename detail::join_select<detail::select_join_size(sizeof...(Ts))>::template f<C::template f, Ts...>::type;
-#endif
+
+	// more compact version that triggers an MSVC bug (internal compiler error):
+	// template <typename... Ts>
+	// using f =
+	//     typename detail::join_select<detail::select_join_size(sizeof...(Ts))>::template f<C::template f, Ts...>::type;
 };
 }  // namespace bits_of_q
 
