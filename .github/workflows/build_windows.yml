@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         compiler: [msvc] 
-        os: [windows-2019]
+        os: [windows-latest]
     
     # Run for matrix elements
     runs-on: ${{matrix.os}}
@@ -33,6 +33,14 @@ jobs:
         with:
           path: repo
           submodules: 'recursive'
+
+      # Checkout vcpkg 
+      - uses: actions/checkout@v2
+        with:
+            repository: microsoft/vcpkg
+            path: vcpkg-latest
+            # Commit to checkout
+            ref: '256c8d6ac6b9d8c834a687b30274ee87c303cb5d'
 
       # Get the ninja generator to use for windows
       - uses: seanmiddleditch/gha-setup-ninja@master
