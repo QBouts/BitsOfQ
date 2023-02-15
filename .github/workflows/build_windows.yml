@@ -24,8 +24,8 @@ jobs:
     strategy:
       matrix:
         compiler: [msvc] 
-        # Run on the 2022 container
-        os: [windows-2022]
+        # Run on the 2019 container
+        os: [windows-2019]
     
     # Run for matrix elements
     runs-on: ${{matrix.os}}
