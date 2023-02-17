@@ -8,7 +8,9 @@ add_library(letscode_options INTERFACE)
 if(CMAKE_CXX_COMPILER_ID MATCHES ".*[cC]lang|GNU")
 	target_compile_options(letscode_options INTERFACE -std=c++20 -fPIC)
 elseif(MSVC)
-	target_compile_features(letscode_options INTERFACE cxx_std_20)
+	include(${CMAKE_SOURCE_DIR}/cmake/MsvcSetup.cmake)
+
+# target_compile_features(letscode_options INTERFACE cxx_std_20)
 else()
 	message(FATAL_ERROR "Unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")
 endif()
@@ -19,7 +21,6 @@ target_link_libraries(
 	project_warnings
 	GTest::GTest
 	GTest::Main
-	pthread
 )
 
 add_subdirectory(JSON_Serialization)
