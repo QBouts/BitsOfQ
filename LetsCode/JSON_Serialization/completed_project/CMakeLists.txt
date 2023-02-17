@@ -7,9 +7,9 @@ add_executable(
 target_link_libraries(
   LetsCode_JSONSerialization_Completed_Test 
   project_warnings
-  pthread
   gtest
   gtest_main
+  pthread
 )
 
 target_compile_options(LetsCode_JSONSerialization_Completed_Test PUBLIC -std=c++2a)
