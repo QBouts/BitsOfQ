@@ -17,8 +17,8 @@ target_link_libraries(
 	letscode_options
 	INTERFACE
 	project_warnings
-	gtest
-	gtest_main
+	GTest::GTest
+	GTest::Main
 	pthread
 )
 
