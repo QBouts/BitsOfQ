@@ -24,6 +24,7 @@
 
 #include <gtest/gtest.h>
 
+#include <array>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
