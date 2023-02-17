@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(metaprogramming)
+project(bitsofq)
 
 # Setup global CMake configuration
 # include(cmake/StandardProjectSettings.cmake)
@@ -26,3 +26,4 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_BUILD_TYPE Debug)
 
 add_subdirectory(Metaprogramming)
+add_subdirectory(LetsCode)

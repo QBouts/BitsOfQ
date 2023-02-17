@@ -1,0 +1,4 @@
+cmake_minimum_required(VERSION 3.16)
+
+add_subdirectory(E1_requirements_and_simple_types)
+add_subdirectory(completed_project)
