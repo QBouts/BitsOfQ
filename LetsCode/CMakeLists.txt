@@ -8,7 +8,7 @@ add_library(letscode_options INTERFACE)
 if(CMAKE_CXX_COMPILER_ID MATCHES ".*[cC]lang|GNU")
 	target_compile_options(letscode_options INTERFACE -std=c++20 -fPIC)
 else()
-	include(${CMAKE_SOURCE_DIR}/cmake/MsvcSetup.cmake)
+	target_compile_features(letscode_options INTERFACE cxx_std_20)
 endif()
 
 target_link_libraries(

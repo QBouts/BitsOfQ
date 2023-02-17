@@ -24,6 +24,7 @@
 
 #include <gtest/gtest.h>
 
+#include <array>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -151,7 +152,7 @@ private:
 		requires(std::is_class_v<T> && !std::is_convertible_v<T, std::string> && !JSONListLike<T>)
 	void serialize_value(const T& t) {
 		static_assert(
-		    requires { serialize(*this, t); },
+		    requires(JSONWriter & writer) { serialize(writer, t); },
 		    "Serialization of custom classes requires a serialize overload to be defined");
 		m_first_nvp = true;
 		m_stream << "{ ";
