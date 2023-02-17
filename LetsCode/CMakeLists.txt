@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
 add_library(letscode_options INTERFACE)
 
