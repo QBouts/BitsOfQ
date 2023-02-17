@@ -104,6 +104,7 @@ public:
 	template <typename T>
 	JSONWriter& operator<<(const T&) {
 		static_assert(is_nvp_v<T>, "To serialize to JSON, pass name-value pairs using the NVP struct");
+		return *this;
 	}
 
 
@@ -119,7 +120,7 @@ public:
 	}
 
 private:
-	[[maybe_unused]] std::ostream& m_stream;
+	std::ostream& m_stream;
 	bool m_first_nvp = true;
 
 	template <typename T>
