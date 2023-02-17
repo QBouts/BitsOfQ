@@ -26,6 +26,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 
 // Requirements:
 // Initialize JSONWriter with a stream

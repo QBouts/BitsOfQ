@@ -26,6 +26,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <type_traits>
 
 // This project was completed in a live test driven development demonstration as part of the LetsCode series on the
@@ -76,11 +77,11 @@ NVP(std::string, T) -> NVP<T>;
 /// types often also fit this description, we explicitly exclude any string-like types from the concept.
 template <typename T>
 concept JSONListLike = requires(T t) {
-	                       t[0];
-	                       t.begin();
-	                       t.end();
-	                       requires !std::is_convertible_v<T, std::string>;
-                       };
+	t[0];
+	t.begin();
+	t.end();
+	requires !std::is_convertible_v<T, std::string>;
+};
 
 /// The JSONWriter class can be used to serialize data to json and output it to a stream.
 /// Data should be passed to instances of the class using the streaming operator and while wrapped in an NVP (name-value
@@ -129,10 +130,8 @@ private:
 	}
 
 	template <typename T>
-	  requires(std::is_convertible_v<T, std::string>)
-	void serialize_value(const T& t) {
-		m_stream << std::quoted(t);
-	}
+		requires(std::is_convertible_v<T, std::string>)
+	void serialize_value(const T& t) { m_stream << std::quoted(t); }
 
 	template <JSONListLike L>
 	void serialize_value(const L& list) {
@@ -149,7 +148,7 @@ private:
 	}
 
 	template <typename T>
-	  requires(std::is_class_v<T> && !std::is_convertible_v<T, std::string> && !JSONListLike<T>)
+		requires(std::is_class_v<T> && !std::is_convertible_v<T, std::string> && !JSONListLike<T>)
 	void serialize_value(const T& t) {
 		static_assert(
 		    requires { serialize(*this, t); },
