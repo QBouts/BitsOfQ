@@ -3,7 +3,7 @@
   "name": "bitsofq",
   "version": "1.0.0",
   "dependencies": [
-    "boost-type-index"
+    "boost-type-index",
     "gtest"
   ]
 }
