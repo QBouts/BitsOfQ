@@ -16,7 +16,7 @@ The code has been verified to compile on:
 
 ## Dependencies
 
-The code related to most tutorials does not have any dependencies outside of the standard library.  A few (soon to be released) tutorials rely on [Boost.TypeIndex](https://www.boost.org/doc/libs/1_78_0/doc/html/boost_typeindex.html) to demonstrate deduced types.
+The code related to most tutorials does not have any dependencies outside of the standard library.  In the LetsCode series google test is used for testing the implementation.
 
 If using the supplied build configuration, a reasonably recent [CMake](https://cmake.org) version is required (Tested with CMake 3.18 and 3.22). When building on Windows, [vcpkg](https://vcpkg.io/en/index.html) is used for automatically retrieving dependencies.
 
